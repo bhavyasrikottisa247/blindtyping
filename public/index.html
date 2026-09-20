@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCAlgorix 2k26 - Blind Typing Challenge</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand-box">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-keyboard"></i>
+                </div>
+                <div class="brand-text">
+                    <h1 class="fest-title">BCAlgorix <span class="highlight-year">2k26</span></h1>
+                    <p class="college-name"><i class="fa-solid fa-building-columns"></i> Kakinada Sri Aditya Degree
+                        College, Srikakulam</p>
+                </div>
+            </div>
+
+            <nav class="nav-actions" id="navActions">
+                <div class="user-badge-container hidden" id="userBadge">
+                    <span class="user-role-tag" id="userRoleTag"><i class="fa-solid fa-user-graduate"></i>
+                        Student</span>
+                    <span class="user-name-text" id="userNameText">Student Name</span>
+                    <button class="btn-logout" id="btnLogout" title="Logout">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Notification Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Main Container -->
+    <main class="main-content">
+
+        <!-- AUTH VIEW (Login / Register Tabs) -->
+        <section id="authView" class="view-section active">
+            <div class="auth-wrapper">
+                <div class="auth-header-card">
+                    <h2 class="auth-welcome-title">Blind Typing Challenge</h2>
+                    <p class="auth-subtitle" style="color: yellow; ">Department of Computer Applications • BCAlgorix 2k26</p>
+                </div>
+
+                <div class="auth-card">
+                    <!-- Auth Navigation Tabs -->
+                    <div class="auth-tabs">
+                        <button class="auth-tab-btn active" data-tab="studentLogin">
+                            <i class="fa-solid fa-user-lock"></i> Student Login
+                        </button>
+                        <button class="auth-tab-btn" data-tab="studentRegister">
+                            <i class="fa-solid fa-user-plus"></i> Student Register
+                        </button>
+                        <button class="auth-tab-btn" data-tab="adminLogin">
+                            <i class="fa-solid fa-shield-halved"></i> Admin Login
+                        </button>
+                    </div>
+
+                    <!-- 1. Student Login Form -->
+                    <form id="formStudentLogin" class="auth-form active">
+                        <div class="form-group">
+                            <h4 style="text-align: center;">This competition is only for first year students ! </h4>
+                            <br>
+                            <label for="loginSuc"><i class="fa-solid fa-id-card"></i> SUC Number</label>
+                            <div class="input-with-icon">
+                                <input type="text" id="loginSuc" placeholder="10-digit SUC "
+                                    maxlength="10" required autocomplete="username">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginPassword"><i class="fa-solid fa-lock"></i> Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required
+                                autocomplete="current-password">
+                        </div>
+
+                        <button type="submit" class="btn-primary btn-block">
+                            <i class="fa-solid fa-right-to-bracket"></i> Login to Challenge
+                        </button>
+                    </form>
+
+                    <!-- 2. Student Register Form -->
+                    <form id="formStudentRegister" class="auth-form">
+                        <div class="form-notice-box">
+                            <i class="fa-solid fa-circle-info"></i> Exclusive for first year BCA Students. Please fill in your
+                            correct details.
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regFullName"><i class="fa-solid fa-user"></i> Full Name</label>
+                            <input type="text" id="regFullName" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-half">
+                                <label for="regSuc"><i class="fa-solid fa-id-card"></i> SUC Number</label>
+                                <input type="text" id="regSuc" placeholder="260300XXXX" maxlength="10" required>
+                                <small class="field-hint">Must start with 260300 (10 digits)</small>
+                            </div>
+
+                            <div class="form-group col-half">
+                                <label for="regSection"><i class="fa-solid fa-layer-group"></i> Section</label>
+                                <select id="regSection" required>
+                                    <option value="" disabled selected>Select Section</option>
+                                    <option value="A">Section A</option>
+                                    <option value="B">Section B</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-half">
+                                <label for="regPassword"><i class="fa-solid fa-lock"></i> Create Password</label>
+                                <input type="password" id="regPassword" placeholder="Minimum 4 characters" required>
+                            </div>
+                            <div class="form-group col-half">
+                                <label for="regConfirmPassword"><i class="fa-solid fa-check-double"></i> Confirm
+                                    Password</label>
+                                <input type="password" id="regConfirmPassword" placeholder="Confirm password" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary btn-block">
+                            <i class="fa-solid fa-user-plus"></i> Register & Enter
+                        </button>
+                    </form>
+
+                    <!-- 3. Admin Login Form -->
+                    <form id="formAdminLogin" class="auth-form">
+                        <div class="form-notice-box admin-notice">
+                            <i class="fa-solid fa-user-shield"></i> Authorized Admin Access Only
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adminUsername"><i class="fa-solid fa-user-gear"></i> Admin Username</label>
+                            <input type="text" id="adminUsername" placeholder="Enter admin username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adminPassword"><i class="fa-solid fa-key"></i> Admin Password</label>
+                            <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                        </div>
+
+                        <button type="submit" class="btn-admin btn-block">
+                            <i class="fa-solid fa-shield-halved"></i> Admin Portal Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD VIEW (Student Main Page) -->
+        <section id="dashboardView" class="view-section">
+            <div class="dashboard-header-banner">
+                <div class="welcome-text-group">
+                    <span class="fest-badge"><i class="fa-solid fa-award"></i> BCAlgorix 2k26 Challenge</span>
+                    <h2 class="welcome-heading">Welcome, <span id="dashStudentName">Participant</span>!</h2>
+                    <p class="welcome-subtext">Kakinada Sri Aditya Degree College, Srikakulam • BCA Blind Typing
+                        Arena</p>
+                </div>
+
+                <div class="overall-score-card">
+                    <div class="score-icon"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="score-details">
+                        <span class="score-label">Your Cumulative Score</span>
+                        <span class="score-value" id="dashOverallScore">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competition Rules Alert -->
+            <div class="rules-card">
+                <div class="rules-card-header">
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Competition Instructions & Guidelines</h3>
+                </div>
+                <div class="rules-grid">
+                    <div class="rule-item">
+                        <i class="fa-solid fa-1"></i>
+                        <div>
+                            <strong>Single Attempt Rule</strong>
+                            <p>Each level can be taken <u>only once</u>. There is no reset or retry option available.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <div>
+                            <strong>Scoring Metrics</strong>
+                            <p>Your score is computed from Words Per Minute (WPM), Accuracy percentage, and Total Time.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <i class="fa-solid fa-trophy"></i>
+                        <div>
+                            <strong>Leaderboard Reveal</strong>
+                            <p>Leaderboard ranks will be revealed by the Admin after all students complete their tests.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Levels Selection Grid -->
+            <div class="section-title-bar">
+                <h3><i class="fa-solid fa-layer-group"></i> Challenge Levels</h3>
+                <span class="sub-badge">Complete in sequential order</span>
+            </div>
+
+            <div class="levels-grid">
+                <!-- Level 1 Card -->
+                <div class="level-card" id="cardLevel1">
+                    <div class="level-card-top">
+                        <span class="level-num-pill">Level 1</span>
+                        <span class="level-status-tag" id="tagLevel1">Available</span>
+                    </div>
+                    <h4 class="level-title">Simple Paragraph</h4>
+                    <p class="level-desc">Simple English paragraph with standard words and minimal punctuation.</p>
+
+                    <div class="level-specs">
+                        <span class="spec-item"><i class="fa-solid fa-delete-left text-success"></i> Backspace
+                            Allowed</span>
+                        <span class="spec-item"><i class="fa-solid fa-eye text-success"></i> Visible Letters</span>
+                    </div>
+
+                    <div class="level-score-preview hidden" id="previewLevel1">
+                        <div class="preview-stat"><span>WPM:</span> <strong id="wpmL1">0</strong></div>
+                        <div class="preview-stat"><span>Accuracy:</span> <strong id="accL1">0%</strong></div>
+                    </div>
+
+                    <button class="btn-level-start" id="btnStartL1" onclick="app.startLevel(1)">
+                        <i class="fa-solid fa-play"></i> Start Level 1
+                    </button>
+                </div>
+
+                <!-- Level 2 Card -->
+                <div class="level-card locked" id="cardLevel2">
+                    <div class="level-card-top">
+                        <span class="level-num-pill">Level 2</span>
+                        <span class="level-status-tag" id="tagLevel2">Locked</span>
+                    </div>
+                    <h4 class="level-title">Complex Paragraph</h4>
+                    <p class="level-desc">Advanced paragraph with punctuations (dashes, quotes, semicolons) and complex
+                        words.</p>
+
+                    <div class="level-specs">
+                        <span class="spec-item"><i class="fa-solid fa-ban text-danger"></i> No Backspace</span>
+                        <span class="spec-item"><i class="fa-solid fa-eye text-success"></i> Visible Letters</span>
+                    </div>
+
+                    <div class="level-score-preview hidden" id="previewLevel2">
+                        <div class="preview-stat"><span>WPM:</span> <strong id="wpmL2">0</strong></div>
+                        <div class="preview-stat"><span>Accuracy:</span> <strong id="accL2">0%</strong></div>
+                    </div>
+
+                    <button class="btn-level-start" id="btnStartL2" onclick="app.startLevel(2)" disabled>
+                        <i class="fa-solid fa-lock"></i> Complete Level 1 First
+                    </button>
+                </div>
+
+                <!-- Level 3 Card -->
+                <div class="level-card locked" id="cardLevel3">
+                    <div class="level-card-top">
+                        <span class="level-num-pill">Level 3</span>
+                        <span class="level-status-tag" id="tagLevel3">Locked</span>
+                    </div>
+                    <h4 class="level-title">Technical Code Challenge</h4>
+                    <p class="level-desc">Extended code snippet with syntaxes, special symbols, brackets
+                        & functions.</p>
+
+                    <div class="level-specs">
+                        <span class="spec-item"><i class="fa-solid fa-ban text-danger"></i> No Backspace</span>
+                        <span class="spec-item"><i class="fa-solid fa-eye-slash text-danger"></i> Masked with *</span>
+                    </div>
+
+                    <div class="level-score-preview hidden" id="previewLevel3">
+                        <div class="preview-stat"><span>WPM:</span> <strong id="wpmL3">0</strong></div>
+                        <div class="preview-stat"><span>Accuracy:</span> <strong id="accL3">0%</strong></div>
+                    </div>
+
+                    <button class="btn-level-start" id="btnStartL3" onclick="app.startLevel(3)" disabled>
+                        <i class="fa-solid fa-lock"></i> Complete Level 2 First
+                    </button>
+                </div>
+            </div>
+
+            <!-- View Leaderboard Action Bar -->
+            <div class="leaderboard-banner-card">
+                <div class="lb-banner-info">
+                    <i class="fa-solid fa-trophy lb-banner-icon"></i>
+                    <div>
+                        <h4>Event Leaderboard</h4>
+                        <p id="lbStatusNotice">Check if the admin has published the official competition rankings.</p>
+                    </div>
+                </div>
+                <button class="btn-secondary" onclick="app.showLeaderboard()">
+                    <i class="fa-solid fa-list-ol"></i> View Leaderboard
+                </button>
+            </div>
+        </section>
+
+        <!-- TYPING ARENA VIEW -->
+        <section id="typingView" class="view-section">
+            <div class="arena-header">
+                <div class="arena-info">
+                    <button class="btn-back-dash" onclick="app.confirmExitArena()">
+                        <i class="fa-solid fa-arrow-left"></i> Dashboard
+                    </button>
+                    <div>
+                        <h3 id="arenaLevelTitle"><i class="fa-solid fa-keyboard"></i> Level 1: Simple Paragraph</h3>
+                        <span id="arenaLevelSpecs" class="arena-specs-pill">Backspace Allowed • Visible Typing</span>
+                    </div>
+                </div>
+
+                <!-- Realtime Metrics Display Bar -->
+                <div class="realtime-metrics-bar">
+                    <div class="metric-box">
+                        <span class="metric-label">TIME</span>
+                        <span class="metric-val" id="liveTime">00:00</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">WPM</span>
+                        <span class="metric-val" id="liveWpm">0</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">ACCURACY</span>
+                        <span class="metric-val" id="liveAccuracy">100%</span>
+                    </div>
+                    <div class="metric-box">
+                        <span class="metric-label">PROGRESS</span>
+                        <span class="metric-val" id="liveProgress">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- In-Place Typing Box -->
+            <div class="typing-arena-container">
+                <div class="typing-instruction-banner" id="typingInstruction">
+                    <i class="fa-solid fa-circle-play"></i> Click inside the box or press any key to start typing!
+                </div>
+
+                <!-- Character Overlay Container -->
+                <div id="paragraphViewport" class="paragraph-viewport" tabindex="0">
+                    <!-- Spans rendered dynamically -->
+                </div>
+
+                <!-- Hidden Input Receiver -->
+                <textarea id="hiddenTypingInput" class="hidden-typing-input" autocomplete="off" autocorrect="off"
+                    autocapitalize="off" spellcheck="false"></textarea>
+            </div>
+        </section>
+
+        <!-- RESULTS MODAL -->
+        <div id="resultsModal" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <div class="modal-badge"><i class="fa-solid fa-circle-check"></i> Level Complete!</div>
+                    <h3 id="resLevelTitle">Level 1 Statistics Summary</h3>
+                </div>
+
+                <div class="results-stats-grid">
+                    <div class="res-stat-card highlight">
+                        <span class="res-label">Speed</span>
+                        <span class="res-value" id="resWpm">0</span>
+                        <span class="res-sub">Words / Min</span>
+                    </div>
+
+                    <div class="res-stat-card highlight">
+                        <span class="res-label">Accuracy</span>
+                        <span class="res-value" id="resAccuracy">0%</span>
+                        <span class="res-sub">Precision Rate</span>
+                    </div>
+
+                    <div class="res-stat-card">
+                        <span class="res-label">Time Taken</span>
+                        <span class="res-value" id="resTime">00:00</span>
+                        <span class="res-sub">Total Duration</span>
+                    </div>
+
+                    <div class="res-stat-card">
+                        <span class="res-label">Words Count</span>
+                        <span class="res-value" id="resWordsTotal">0</span>
+                        <span class="res-sub"><span class="text-success" id="resWordsCorrect">0</span> Correct / <span
+                                class="text-danger" id="resWordsIncorrect">0</span> Wrong</span>
+                    </div>
+
+                    <div class="res-stat-card">
+                        <span class="res-label">Characters Count</span>
+                        <span class="res-value" id="resCharsTotal">0</span>
+                        <span class="res-sub"><span class="text-success" id="resCharsCorrect">0</span> Correct / <span
+                                class="text-danger" id="resCharsIncorrect">0</span> Wrong</span>
+                    </div>
+
+                    <div class="res-stat-card highlight-gold">
+                        <span class="res-label">Calculated Score</span>
+                        <span class="res-value" id="resScore">0</span>
+                        <span class="res-sub">Points Added</span>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-secondary" onclick="app.closeResultsModal()">
+                        <i class="fa-solid fa-house"></i> Go to Dashboard
+                    </button>
+                    <button class="btn-primary" id="btnNextLevelAction" onclick="app.proceedToNextLevel()">
+                        <i class="fa-solid fa-forward"></i> Proceed to Next Level
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEADERBOARD VIEW -->
+        <section id="leaderboardView" class="view-section">
+            <div class="lb-header">
+                <button class="btn-back-dash" onclick="app.showDashboard()">
+                    <i class="fa-solid fa-arrow-left"></i> Dashboard
+                </button>
+                <div>
+                    <h2><i class="fa-solid fa-trophy"></i> BCAlgorix 2k26 Leaderboard</h2>
+                    <p class="sub-text">Kakinada Sri Aditya Degree College, Srikakulam • Official Rankings</p>
+                </div>
+            </div>
+
+            <!-- Locked Leaderboard State -->
+            <div id="lbLockedState" class="lb-locked-card hidden">
+                <div class="lock-icon-circle"><i class="fa-solid fa-lock"></i></div>
+                <h3>Leaderboard Currently Locked</h3>
+                <p>The leaderboard will be revealed by the Administrator once all BCA participants complete their test
+                    levels.</p>
+                <div class="locked-tip"><i class="fa-solid fa-clock"></i> Please check back after the event timer
+                    ends!</div>
+            </div>
+
+            <!-- Revealed Leaderboard Content -->
+            <div id="lbRevealedContent" class="lb-content-area hidden">
+                <div class="lb-filter-bar">
+                    <span class="filter-label"><i class="fa-solid fa-filter"></i> Filter Section:</span>
+                    <button class="lb-filter-btn active" data-sec="ALL">All Sections</button>
+                    <button class="lb-filter-btn" data-sec="A">Section A</button>
+                    <button class="lb-filter-btn" data-sec="B">Section B</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="lb-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Student Name</th>
+                                <th>SUC Number</th>
+                                <th>Sec</th>
+                                <th>Levels Completed</th>
+                                <th>Total WPM</th>
+                                <th>Avg Accuracy</th>
+                                <th>Total Time</th>
+                                <th>Overall Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lbTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN PANEL VIEW -->
+        <section id="adminView" class="view-section">
+            <div class="admin-header">
+                <div>
+                    <h2><i class="fa-solid fa-user-shield"></i> BCAlgorix 2k26 Admin Console</h2>
+                    <p>Control competition paragraphs, reveal leaderboard, and inspect participant scorecards.</p>
+                </div>
+                <div class="admin-top-actions">
+                    <button class="btn-logout" onclick="app.logout()">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout Admin
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Sub Navigation Tabs -->
+            <div class="admin-tabs">
+                <button class="admin-tab-btn active" data-admin-tab="paragraphs">
+                    <i class="fa-solid fa-file-pen"></i> Paragraph Controls
+                </button>
+                <button class="admin-tab-btn" data-admin-tab="leaderboardControl">
+                    <i class="fa-solid fa-trophy"></i> Leaderboard Reveal
+                </button>
+                <button class="admin-tab-btn" data-admin-tab="studentReports">
+                    <i class="fa-solid fa-users"></i> Participant Results (<span id="adminTotalStudents">0</span>)
+                </button>
+            </div>
+
+            <!-- 1. Admin Paragraph Editor Tab -->
+            <div id="tabParagraphs" class="admin-tab-content active">
+                <form id="formAdminParagraphs">
+                    <div class="admin-card">
+                        <div class="card-title-bar">
+                            <h3><i class="fa-solid fa-1"></i> Level 1 Paragraph (Simple Text)</h3>
+                            <span class="char-count-badge" id="countL1">0 chars</span>
+                        </div>
+                        <textarea id="adminLevel1Text" rows="5" class="admin-textarea" required></textarea>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="card-title-bar">
+                            <h3><i class="fa-solid fa-2"></i> Level 2 Paragraph (Complex Text with Punctuations)</h3>
+                            <span class="char-count-badge" id="countL2">0 chars</span>
+                        </div>
+                        <textarea id="adminLevel2Text" rows="6" class="admin-textarea" required></textarea>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="card-title-bar">
+                            <h3><i class="fa-solid fa-3"></i> Level 3 Paragraph (Technical Code Snippet - +30%
+                                Extended)</h3>
+                            <span class="char-count-badge" id="countL3">0 chars</span>
+                        </div>
+                        <textarea id="adminLevel3Text" rows="8" class="admin-textarea font-mono" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-admin btn-block">
+                        <i class="fa-solid fa-floppy-disk"></i> Save & Update Paragraphs
+                    </button>
+                </form>
+            </div>
+
+            <!-- 2. Admin Leaderboard Reveal Tab -->
+            <div id="tabLeaderboardControl" class="admin-tab-content">
+                <div class="admin-card">
+                    <h3><i class="fa-solid fa-eye"></i> Leaderboard Visibility Setting</h3>
+                    <p class="text-sub">Control when the official leaderboard is visible to participants.</p>
+
+                    <div class="reveal-toggle-box">
+                        <div class="status-indicator-group">
+                            <span class="status-dot" id="lbStatusDot"></span>
+                            <span class="status-text" id="lbStatusText">Leaderboard Hidden</span>
+                        </div>
+
+                        <button id="btnToggleLeaderboard" class="btn-toggle-lb" onclick="admin.toggleLeaderboard()">
+                            <i class="fa-solid fa-eye"></i> Reveal Leaderboard to Students
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Admin Participant Scorecards Tab -->
+            <div id="tabStudentReports" class="admin-tab-content">
+                <div class="admin-card">
+                    <div class="filter-search-bar">
+                        <div class="search-input-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="adminSearchInput" placeholder="Search by SUC or Name..."
+                                onkeyup="admin.filterTable()">
+                        </div>
+
+                        <div class="sec-filter-box">
+                            <label>Section:</label>
+                            <select id="adminSecFilter" onchange="admin.filterTable()">
+                                <option value="ALL">All Sections</option>
+                                <option value="A">Section A</option>
+                                <option value="B">Section B</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>SUC Number</th>
+                                    <th>Student Name</th>
+                                    <th>Sec</th>
+                                    <th>L1 (WPM / Acc)</th>
+                                    <th>L2 (WPM / Acc)</th>
+                                    <th>L3 (WPM / Acc)</th>
+                                    <th>Total WPM</th>
+                                    <th>Avg Acc</th>
+                                    <th>Total Time</th>
+                                    <th>Overall Score</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminStudentTableBody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>© 2026 <strong>BCAlgorix 2k26</strong> • Department of Computer Applications (BCA)</p>
+        <p class="sub-footer">Kakinada Sri Aditya Degree College, Srikakulam</p>
+    </footer>
+
+    <!-- Frontend JavaScript Files -->
+    <script src="js/auth.js"></script>
+    <script src="js/typing.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
